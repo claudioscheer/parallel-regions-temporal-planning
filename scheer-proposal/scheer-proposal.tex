@@ -10,14 +10,14 @@
 \setlength{\pdfpagewidth}{8.5in}
 \setlength{\pdfpageheight}{11in}
 \pdfinfo{
-/Title (A Representation of a Compiler in PDDL)
+/Title (Parallel Regions using a PDDL Formalization)
 /Author (Claudio Scheer)}
 \setcounter{secnumdepth}{0}  
 
 
 \begin{document}
 
-\title{A Representation of a Compiler in PDDL}
+\title{Parallel Regions using a PDDL Formalization}
 \author{Claudio Scheer\\
   Master's Degree in Computer Science\\
   Pontifical Catholic University of Rio Grande do Sul - PUCRS\\
@@ -27,37 +27,45 @@
 
 \begin{abstract}
   \begin{quote}
-    Testing whether a program can be run in parallel is not an easy task. This process involves tasks that demand a lot of time and, consequently, finantial resources. As an approach to this problem, this paper proposes a formalization of a compiler with PDDL. With this formalization, it will be possible to reduce the identification of a parallel code to a conventional search problem.
+    Testing whether a region in a program can be run in parallel is not an easy task. This process takes a lot of time and, consequently, finantial resources. As an approach to this problem, this paper proposes formalizing a compiler with PDDL. With this formalization, it will be possible to reduce the identification of a parallel code to a conventional \textbf{search problem}.
   \end{quote}
 \end{abstract}
 
-\noindent There are still many programs that do not exploit the parallel capacity of today's processors. The cost to rewrite this program is high. Among the steps involved in the process of migrating a program to a parallel approach, the most expensive is to identify the regions of the program than can be executed in parallel.
+\noindent There are still many programs that do not exploit the parallel capacity of today's processors. One of the main reasons for this is because the cost to rewrite a program is high. Among the steps involved in the process of migrating a program to a parallel approach, the most expensive is to identify the regions of the program than can be executed in parallel. In addition to identifying the regions, it is necessary to validate whether the parallel execution of that region brings positive results.
 
-According to \cite{doi:10.1177/1094342017695639}, loops detection, variable dependencies, identifying whether the arguments are read or written, among other analyzes, are the main patterns that identify a region parallel in a program.
+According to \cite{doi:10.1177/1094342017695639}, loops detection, variable dependencies, identifying whether the arguments are read or written, among other analyzes, are the main patterns that identify a region parallel in a program. Over time, these caracteristics may change and the static analysis will need to be changed.
 
-Instead of using a static analysis of the source code, my approach will be to reduce the problem of identifying a region that can be executed in parallel to a search problem. The domain will be formalized using PDDL. In a nutshell, the domain will function as a compiler. Section~\ref{technical-approach} discusses in more detail how the PDDL domain will work.
+Therefore, instead of using a static analysis of the source code, the approach in this paper will reduce the problem of identifying a region that can be executed in parallel to a \textbf{search problem}. The compiler domain will be formalized using PDDL. In a nutshell, the domain will function as a source code compiler. Section~Technical~Approach discusses in more detail how the PDDL domain will work.
 
-A PDDL domain describe actions that can be performed in an initial state, to achieve a set of goals. The initial state of the proposed approach will be the source code mapped to a set of predicates. This step is the bottleneck of that approach. However, this approach can be easily automated (I was thinking of creating this tool, but first I will implement the compiler). The expected set of goals will be the sequential execution of all the instruction mapped in the predicates.
+A PDDL domain describe actions that can be performed in an initial state, to achieve a set of goals. In this paper, the source code will be treated as the initial state. The set of goals will be the complete execution of all instructions in the source code, in the correct order. A problem formalized in PDDL cannot understand source code written in C as input, for example. The initial state must be a set of predicates. Hence, the source code provided as an initial state for the planner must be mapped to a set of predicates. This process is the bottleneck of the proposed approach. However, this task can be easily automated (I was thinking of creating this tool, but first I will implement the PDDL domain).
+
+The planner will be reponsible for finding the set of predicates that can be run in parallel. In the Section~Results~Evaluation, I discuss more about how I will evaluate whether the results were positive or not. In addition, in Section~Project~Management, I show the schedule that will be followed to execute this proposal.
 
 % I did not find anything related.
 
-\section{Technical Approach} \label{technical-approach}
+\section{Technical Approach}
 
-Compilers, in general, are complex programs. They need to translate the written source code into an executable code. In a rough overview, the compiler needs to break the source code into tokens. A token can be a keyword, a variable name, an operator, etc. The tokens is generally represented in a tree. In this tree, the compiler run some optimizations, such as removing unused variables and unreachable codes. After all that, the compiler can convert the tree to machine instructions.
+Compilers are the programs that convert written source code into executable code. Compilers, in general, are complex programs. In general, the compiler needs to break the source code into tokens\footnote{A token can be a keyword, a variable name, an operator, etc.} and represent it in a tree. Over this tree, the compiler performs some optimizations, such as removing unused variables and unreachable codes. After all this, the compiler can convert the tree into machine instructions.
 
-In addition, the compiler must support all instructions provided by the programming language. As you can see, it is difficult to develop a compiler. Therefore, in this paper, I propose a compiler formalized as a PDDL domain, with support for only a few intructions (I do not know which instructions. I was thinking in arithmetic instructions, functions and loops). In theory, this approach would work for all programming languages. However, I will create the actions and the predicates from the perspective of a source code written in C.
+The compiler must support all instructions provided by the programming language and be able to translate it for every operating systems. It is difficult to develop a compiler. In the proposed approach it will not be necessary to deal with all these complexities. The compiler will be formalized as a PDDL domain, with support for arithmetic and binary operations, functions and loop intructions.
 
-- It would be cool to use fluents and test whether the output is correct or not
+In theory, this approach would work for all programming languages. However, I will create the actions and the predicates from the perspective of a source code written in C.
 
-- cite planners to be tested
+There are still some questions to be answered during the execution of the project, as follows:
 
-- include an example
-
+\begin{enumerate}
+  \item Is the compiler domain capable of handling fluent variables and predicates?
+  \item Is the compiler domain capable of performing operations with strings?
+  \item Which planners should I test the compiler domain on?
+  \item How does a planner find a parallel region?
+  \item Can I set a weight for the planner to get regions that are really worth running in parallel?
+\end{enumerate}
 
 \section{Results Evaluation}
 
-As previously described, the goal of the planner will be to execute all the instructions of the program in the correct order, and find for instructions that can be executed in parallel. Therefore, to evaluate the correct output of the planner, I will map the predicates back to the source code and validate the parallel execution proposed by the planner.
+As previously described, the goal of the planner will be to execute all instructions in the correct order and find instructions that can be executed in parallel. Hence, to evaluate the correct output of the planner, I will map the predicates back to the source code and validate the parallel execution proposed by the planner.
 
+The main objective of decoding the planner output in a source code is to test whether the parallel execution really brings positive results. A positive result, in the proposed approach, can be understood as the execution of a problem in less time.
 
 \section{Project Management}
 
@@ -65,7 +73,7 @@ As previously described, the goal of the planner will be to execute all the inst
   \begin{tabularx}{0.45\textwidth}{
       | >{\raggedright\arraybackslash}X
       | >{\raggedright\arraybackslash}X
-      | >{\raggedright\arraybackslash}X |}
+      | >{\raggedright\arraybackslash}X|}
     \hline
     \textbf{Task}                 & \textbf{Start} & \textbf{End} \\
     \hline
@@ -79,6 +87,12 @@ As previously described, the goal of the planner will be to execute all the inst
     \hline
   \end{tabularx}
 \end{center}
+
+\section{Conclusion}
+
+In summary, this approach will reduce the problem of finding a parallel region to a \textbf{search problem}. As an output, the planner will execute all instructions of the program and identify the regions that can be executed in parallel. Clearly, these approach needs a validation in terms of testing to find out if the regions are really parallel.
+
+The approach proposed in this paper is not be conventional for finding parallel regions. However, if the results are positives, this approach can be used to reduce the time and cost to find these regions.
 
 \bibliographystyle{aaai}
 \bibliography{references}
