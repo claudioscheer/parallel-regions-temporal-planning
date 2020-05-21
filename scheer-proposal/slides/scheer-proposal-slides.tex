@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage{utopia} %font utopia imported
+\usepackage{tabularx}
 
 \usetheme{Madrid}
 \usecolortheme{default}
@@ -9,10 +10,10 @@
 %------------------------------------------------------------
 %This block of code defines the information to appear in the
 %Title page
-\title[Compiler in PDDL]
-{A Representation of a Compiler in PDDL}
+\title[Parallel Regions with PDDL]
+{Parallel Regions using a PDDL Formalization}
 
-\subtitle{With a limited number of instructions}
+\subtitle{PDDL domain as a compiler}
 
 \author[Claudio Scheer]
 {Claudio~Scheer\inst{1}}
@@ -50,98 +51,158 @@
 
 \begin{document}
 
-%The next statement creates the title page.
 \frame{\titlepage}
 
-
 %---------------------------------------------------------
-%This block of code is for the table of contents after
-%the title page
+
 \begin{frame}
   \frametitle{Table of Contents}
   \tableofcontents
 \end{frame}
-%---------------------------------------------------------
-
-
-\section{First section}
 
 %---------------------------------------------------------
-%Changing visivility of the text
+
+\section{Problem}
+
 \begin{frame}
-  \frametitle{Sample frame title}
-  This is a text in second frame. For the sake of showing an example.
+  \frametitle{Finding parallel regions}
 
   \begin{itemize}
-    \item<1-> Text visible on slide 1
-    \item<2-> Text visible on slide 2
-    \item<3> Text visible on slides 3
-    \item<4-> Text visible on slide 4
+    \item It takes a lot of time;
+    \item It will cost money.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Common approaches}
+  Static analysis of the source code:
+
+  \begin{itemize}
+    \item<1-> loops detection;
+    \item<2-> variable dependencies;
+    \item<3-> identifying whether the arguments are read or written.
   \end{itemize}
 \end{frame}
 
 %---------------------------------------------------------
 
+\section{Proposed approach}
 
-%---------------------------------------------------------
-%Example of the \pause command
 \begin{frame}
-  In this slide \pause
+  \frametitle{PDDL domain}
 
-  the text will be partially visible \pause
+  PDDL domain will work as a compiler. \pause
 
-  And finally everything will be there
+  \begin{itemize}
+    \item Instructions support:
+          \begin{itemize}
+            \item arithmetic and binary operators;
+            \item functions;
+            \item loop.
+          \end{itemize}
+  \end{itemize}
 \end{frame}
-%---------------------------------------------------------
 
-\section{Second section}
-
-%---------------------------------------------------------
-%Highlighting text
 \begin{frame}
-  \frametitle{Sample frame title}
+  \frametitle{PDDL problem}
 
-  In this slide, some important text will be
-  \alert{highlighted} because it's important.
-  Please, don't abuse it.
+  Source code will be mapped to a set of predicates. \pause
 
-  \begin{block}{Remark}
-    Sample text
-  \end{block}
+  \begin{itemize}
+    \item Goal:
+          \begin{itemize}
+            \item execute all instructions;
+            \item must run in the correct order.
+          \end{itemize}
+  \end{itemize}
+\end{frame}
 
-  \begin{alertblock}{Important theorem}
-    Sample text in red box
+\begin{frame}
+  \frametitle{Bottleneck}
+
+  \begin{alertblock}{Bad}
+    Creating a set of predicates from source code will not be easy.
   \end{alertblock}
 
-  \begin{examples}
-    Sample text in green box. The title of the block is ``Examples".
-  \end{examples}
+  \begin{block}{Good}
+    It can be easily automated.
+  \end{block}
 \end{frame}
-%---------------------------------------------------------
-
 
 %---------------------------------------------------------
-%Two columns
+
+\section{Results evaluation}
+
 \begin{frame}
-  \frametitle{Two-column slide}
+  \frametitle{Results evaluation}
 
-  \begin{columns}
-
-    \column{0.5\textwidth}
-    This is a text in first column.
-    $$E=mc^2$$
-    \begin{itemize}
-      \item First item
-      \item Second item
-    \end{itemize}
-
-    \column{0.5\textwidth}
-    This text will be in the second column
-    and on a second tought this is a nice looking
-    layout in some cases.
-  \end{columns}
+  \begin{itemize}
+    \item Decode planner output to source code;
+    \item Validate the parallel execution;
+    \item Was the execution time shorter?
+          \begin{itemize}
+            \item I should probably test a big problem;
+            \item I may not have enough time.
+          \end{itemize}
+  \end{itemize}
 \end{frame}
+
 %---------------------------------------------------------
 
+\section{Questions/Ideas}
+
+\begin{frame}
+  \frametitle{Questions/Ideas}
+
+  \begin{enumerate}
+    \item<1-> Is the compiler domain capable of handling fluent variables and predicates?
+    \item<2-> Is the compiler domain capable of performing operations with strings?
+    \item<3-> Which planners should I test the compiler domain on?
+    \item<4-> How does a planner find a parallel region?
+    \item<5-> Can I set a weight for the planner to get regions that are really worth running in parallel?
+  \end{enumerate}
+\end{frame}
+
+%---------------------------------------------------------
+
+\section{Schedule}
+
+\begin{frame}
+  \frametitle{Schedule}
+
+  \begin{center}
+    \begin{tabularx}{0.9\textwidth}{
+        | >{\raggedright\arraybackslash}X
+        | >{\raggedright\arraybackslash}X
+        | >{\raggedright\arraybackslash}X|}
+      \hline
+      \textbf{Task}                 & \textbf{Start} & \textbf{End} \\
+      \hline
+      Understand better compilers   & 06-01-2020     & 06-03-2020   \\
+      \hline
+      Support sum instruction       & 06-03-2020     & 06-07-2020   \\
+      \hline
+      Support proposed instructions & 06-08-2020     & 06-15-2020   \\
+      \hline
+      Evaluate results              & 06-16-2020     & 06-20-2020   \\
+      \hline
+      Write paper                   & 06-20-2020     & 06-25-2020   \\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{frame}
+
+%---------------------------------------------------------
+
+\section{Conclusion}
+
+\begin{frame}
+  \frametitle{Conclusion}
+
+  \begin{itemize}
+    \item<1-> This is not a conventional approach;
+    \item<2-> If the results are positives, the approach may reduce the amount of time to find parallel regions.
+  \end{itemize}
+\end{frame}
 
 \end{document}
