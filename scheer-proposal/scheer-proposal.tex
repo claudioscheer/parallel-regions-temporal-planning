@@ -37,7 +37,7 @@ According to \cite{doi:10.1177/1094342017695639}, loops detection, variable depe
 
 Therefore, instead of using a static analysis of the source code, the approach in this paper will reduce the problem of identifying a region that can be executed in parallel to a \textbf{search problem}. The compiler domain will be formalized using PDDL. In a nutshell, the domain will function as a source code compiler. Section~Technical~Approach discusses in more detail how the PDDL domain will work.
 
-A PDDL domain describe actions that can be performed in an initial state, to achieve a set of goals. In this paper, the source code will be treated as the initial state. The set of goals will be the complete execution of all instructions in the source code, in the correct order. A problem formalized in PDDL cannot understand source code written in C as input, for example. The initial state must be a set of predicates. Hence, the source code provided as an initial state for the planner must be mapped to a set of predicates. This process is the bottleneck of the proposed approach. However, this task can be easily automated (I was thinking of creating this tool, but first I will implement the PDDL domain).
+A PDDL domain describe actions that can be performed in an initial state, to achieve a set of goals. In this paper, the source code will be treated as the initial state. The set of goals will be the complete execution of all instructions in the source code, in the correct order. A problem formalized in PDDL cannot understand source code written in C++ as input, for example. The initial state must be a set of predicates. Hence, the source code provided as an initial state for the planner must be mapped to a set of predicates. This process is the bottleneck of the proposed approach. However, this task can be easily automated (I was thinking of creating this tool, but first I will implement the PDDL domain).
 
 The planner will be reponsible for finding the set of predicates that can be run in parallel. In the Section~Results~Evaluation, I discuss more about how I will evaluate whether the results were positive or not. In addition, in Section~Project~Management, I show the schedule that will be followed to execute this proposal.
 
@@ -49,7 +49,7 @@ Compilers are the programs that convert written source code into executable code
 
 The compiler must support all instructions provided by the programming language and be able to translate it for every operating systems. It is difficult to develop a compiler. In the proposed approach it will not be necessary to deal with all these complexities. The compiler will be formalized as a PDDL domain, with support for arithmetic and binary operations, functions and loop intructions.
 
-In theory, this approach would work for all programming languages. However, I will create the actions and the predicates from the perspective of a source code written in C.
+In theory, this approach would work for all programming languages. However, I will create the actions and the predicates from the perspective of a source code written in C++.
 
 There are still some questions to be answered during the execution of the project, as follows:
 
@@ -94,7 +94,7 @@ The main objective of decoding the planner output in a source code is to test wh
 
 In summary, this approach will reduce the problem of finding a parallel region to a \textbf{search problem}. As an output, the planner will execute all instructions of the program and identify the regions that can be executed in parallel. Clearly, these approach needs a validation in terms of testing to find out if the regions are really parallel.
 
-The approach proposed in this paper is not be conventional for finding parallel regions. However, if the results are positives, this approach can be used to reduce the time and cost to find these regions.
+The approach proposed in this paper is not conventional for finding parallel regions. However, if the results are positives, this approach can be used to reduce the time and cost to find these regions.
 
 \bibliographystyle{aaai}
 \bibliography{references}
