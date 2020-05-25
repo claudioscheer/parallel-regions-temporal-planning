@@ -7,7 +7,7 @@
     )
 
     (:init
-        (dependencies id0)
+        (dependency_satisfied id0)
         (variable_value varA valueA id1 id0)
         (variable_value varB valueB id2 id1)
         (variable_value varC valueC id3 id2)
