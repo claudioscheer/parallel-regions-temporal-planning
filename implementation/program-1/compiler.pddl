@@ -10,17 +10,22 @@
     )
 
     (:predicates
-        (variable_value ?variable - variable_name ?value - variable_value ?id - id)
+        (variable_value ?variable - variable_name ?value - variable_value ?id - id ?dependency_id - id)
         (operation_executed ?operation_id - operation ?id - id)
+        (dependencies ?id - id)
     )
 
     (:action assignment
-        :parameters (?var - variable_name ?value - variable_value ?operation_id - operation ?id_variable_value - id ?id_assignment - id)
+        :parameters (?var - variable_name ?value - variable_value ?operation_id - operation ?id_variable_value - id ?id_assignment - id ?dependency_id - id)
         :precondition (and
             (not (operation_executed ?operation_id ?id_assignment))
-            (variable_value ?var ?value ?id_variable_value)
+            (variable_value ?var ?value ?id_variable_value ?dependency_id)
+            (dependencies ?dependency_id)
             (= ?id_variable_value ?id_assignment)
         )
-        :effect (and (operation_executed ?operation_id ?id_assignment))
+        :effect (and
+            (operation_executed ?operation_id ?id_assignment)
+            (dependencies ?id_variable_value)
+        )
     )
 )

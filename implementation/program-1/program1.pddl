@@ -3,13 +3,14 @@
         sumAB assignmentA assignmentB assignmentC - operation
         varA varB varC - variable_name
         valueA valueB valueC - variable_value
-        id1 id2 id3 - id
+        id0 id1 id2 id3 - id
     )
 
     (:init
-        (variable_value varA valueA id1)
-        (variable_value varB valueB id2)
-        (variable_value varC valueC id3)
+        (dependencies id0)
+        (variable_value varA valueA id1 id0)
+        (variable_value varB valueB id2 id1)
+        (variable_value varC valueC id3 id2)
     )
 
     (:goal (and
