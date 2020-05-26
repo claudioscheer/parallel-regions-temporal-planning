@@ -1,0 +1,10 @@
+;;!domain: program1
+;;!problem: problem1
+
+0.00100: (assignment vara valuea assignmenta)
+0.00200: (assignment varb valueb assignmentb)
+0.00300: (binary_operation varb valueb assignmentb vara valuea assignmenta varc valuec assignmentc sumab)
+0.00400: (assignment varc valuec assignmentc)
+
+; Makespan: 0.004
+; Cost: 0.004

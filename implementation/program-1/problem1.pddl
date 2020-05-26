@@ -1,18 +1,20 @@
 (define (problem problem1) (:domain program1)
     (:objects
-        sumAB assignmentA assignmentB assignmentC - operation
+        assignmentA assignmentB assignmentC - assignment
+        sumAB - operation
         varA varB varC - variable_name
         valueA valueB valueC - variable_value
     )
 
     (:init
-        (variable_value varA valueA)
-        (variable_value varB valueB)
+        (variable_info varA valueA assignmentA)
+        (variable_info varB valueB assignmentB)
     )
 
     (:goal (and
-        (operation_executed assignmentA)
-        (operation_executed assignmentB)
-        (operation_executed assignmentC)
+        (executed_assingment assignmentA)
+        (executed_assingment assignmentB)
+        (executed_binary_operation sumAB)
+        (executed_assingment assignmentC)
     ))
 )
