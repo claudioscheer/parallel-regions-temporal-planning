@@ -1,0 +1,9 @@
+;;!domain: program1
+;;!problem: problem1
+
+0.00100: (assignment vara valuea assignmenta)
+0.00200: (assignment vara valuea assignmentb)
+0.00300: (assignment vara valuea assignmentc)
+
+; Makespan: 0.003
+; Cost: 0.003
