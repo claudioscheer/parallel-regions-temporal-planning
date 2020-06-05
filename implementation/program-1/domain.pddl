@@ -34,25 +34,25 @@
         :parameters (
             ?varA - variable_name
             ?valueA - variable_value
-            ?op_A - assignment
+            ?opA - assignment
             ?varB - variable_name
             ?valueB - variable_value
-            ?op_B - assignment
+            ?opB - assignment
             ?varC - variable_name
             ?valueC - variable_value
-            ?op_C - assignment
+            ?opC - assignment
             ?operation_id - operation
         )
         :precondition (and
-            (variable_info ?varA ?valueA ?op_A)
-            (variable_info ?varB ?valueB ?op_B)
-            (not (executed_binary_operation ?op_A ?op_B ?operation_id ?op_C))
-            (executed_assingment ?op_A)
-            (executed_assingment ?op_B)
+            (variable_info ?varA ?valueA ?opA)
+            (variable_info ?varB ?valueB ?opB)
+            (not (executed_binary_operation ?opA ?opB ?operation_id ?opC))
+            (executed_assingment ?opA)
+            (executed_assingment ?opB)
         )
         :effect (and 
-            (variable_info ?varC ?valueC ?op_C)
-            (executed_binary_operation ?op_A ?op_B ?operation_id ?op_C)
+            (variable_info ?varC ?valueC ?opC)
+            (executed_binary_operation ?opA ?opB ?operation_id ?opC)
         )
     )
 )

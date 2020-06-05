@@ -1,4 +1,4 @@
-(define (problem problem1) (:domain program1)
+(define (problem problem2) (:domain program1)
     (:objects
         assignmentA assignmentB assignmentC - assignment
         sumAB - operation
