@@ -12,7 +12,7 @@
     (:predicates
         (variable_info ?variable - variable_name ?value - variable_value ?assignment_operation - assignment)
         (executed_assingment ?id - assignment)
-        (executed_binary_operation ?id - operation)
+        (executed_binary_operation ?a - assignment ?b - assignment ?id - operation ?c - assignment)
     )
 
     (:action assignment
@@ -34,32 +34,25 @@
         :parameters (
             ?varA - variable_name
             ?valueA - variable_value
-            ?operation_id_A - assignment
+            ?op_A - assignment
             ?varB - variable_name
             ?valueB - variable_value
-            ?operation_id_B - assignment
+            ?op_B - assignment
             ?varC - variable_name
             ?valueC - variable_value
-            ?operation_id_C - assignment
+            ?op_C - assignment
             ?operation_id - operation
         )
         :precondition (and
-            (not (= ?operation_id_A ?operation_id_B))
-            ; This should be reviewed, because It disable to add the same variable, for example.
-            (not (= ?varC ?varA))
-            (not (= ?varC ?varB))
-            (not (= ?valueC ?valueB))
-            (not (= ?valueC ?valueA))
-            (variable_info ?varA ?valueA ?operation_id_A)
-            (variable_info ?varB ?valueB ?operation_id_B)
-            (not (variable_info ?varC ?valueC ?operation_id_C))
-            (not (executed_binary_operation ?operation_id))
-            (executed_assingment ?operation_id_A)
-            (executed_assingment ?operation_id_B)
+            (variable_info ?varA ?valueA ?op_A)
+            (variable_info ?varB ?valueB ?op_B)
+            (not (executed_binary_operation ?op_A ?op_B ?operation_id ?op_C))
+            (executed_assingment ?op_A)
+            (executed_assingment ?op_B)
         )
         :effect (and 
-            (variable_info ?varC ?valueC ?operation_id_C)
-            (executed_binary_operation ?operation_id)
+            (variable_info ?varC ?valueC ?op_C)
+            (executed_binary_operation ?op_A ?op_B ?operation_id ?op_C)
         )
     )
 )
