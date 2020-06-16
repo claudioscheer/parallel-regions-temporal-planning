@@ -8,7 +8,6 @@ int main()
     {
         a += const_value;
     }
-    int x = a;
-    std::cout << x << std::endl;
+    std::cout << a << std::endl;
     return 0;
 }
