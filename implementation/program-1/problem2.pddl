@@ -11,8 +11,8 @@
     )
 
     (:goal (and
-        (executed_assingment assignmentA)
+        (executed_assignment assignmentA)
         (executed_binary_operation assignmentA assignmentA sumAA assignmentC)
-        (executed_assingment assignmentC)
+        (executed_assignment assignmentC)
     ))
 )

@@ -11,7 +11,7 @@
 
     (:predicates
         (variable_info ?variable - variable_name ?value - variable_value ?assignment_operation - assignment)
-        (executed_assingment ?id - assignment)
+        (executed_assignment ?id - assignment)
         (executed_binary_operation ?a - assignment ?b - assignment ?id - operation ?c - assignment)
     )
 
@@ -22,11 +22,11 @@
             ?operation_id - assignment
         )
         :precondition (and
-            (not (executed_assingment ?operation_id))
+            (not (executed_assignment ?operation_id))
             (variable_info ?var ?value ?operation_id)
         )
         :effect (and
-            (executed_assingment ?operation_id)
+            (executed_assignment ?operation_id)
         )
     )
 
@@ -47,8 +47,8 @@
             (variable_info ?varA ?valueA ?opA)
             (variable_info ?varB ?valueB ?opB)
             (not (executed_binary_operation ?opA ?opB ?operation_id ?opC))
-            (executed_assingment ?opA)
-            (executed_assingment ?opB)
+            (executed_assignment ?opA)
+            (executed_assignment ?opB)
         )
         :effect (and 
             (variable_info ?varC ?valueC ?opC)

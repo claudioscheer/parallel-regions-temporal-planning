@@ -12,9 +12,9 @@
     )
 
     (:goal (and
-        (executed_assingment assignmentA)
-        (executed_assingment assignmentB)
+        (executed_assignment assignmentA)
+        (executed_assignment assignmentB)
         (executed_binary_operation assignmentA assignmentB sumAB assignmentC)
-        (executed_assingment assignmentC)
+        (executed_assignment assignmentC)
     ))
 )

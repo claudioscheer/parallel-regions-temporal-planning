@@ -12,13 +12,13 @@
     )
 
     (:goal (and
-        (executed_assingment assignmentConst)
-        (executed_assingment assignmentA)
+        (executed_assignment assignmentConst)
+        (executed_assignment assignmentA)
         (executed_binary_operation assignmentA assignmentConst sumLoop0 assignmentA0)
-        (executed_assingment assignmentA0)
+        (executed_assignment assignmentA0)
         (executed_binary_operation assignmentA0 assignmentConst sumLoop1 assignmentA1)
-        (executed_assingment assignmentA1)
+        (executed_assignment assignmentA1)
         (executed_binary_operation assignmentA1 assignmentConst sumLoop2 assignmentA2)
-        (executed_assingment assignmentA2)
+        (executed_assignment assignmentA2)
     ))
 )
