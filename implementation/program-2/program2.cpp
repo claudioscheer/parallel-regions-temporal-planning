@@ -2,12 +2,13 @@
 
 int main()
 {
-    int count = 0;
-    for (int i = 0; i < 10; ++i)
+    int const_value = 1;
+    int a = 0;
+    for (int i = 0; i < 3; ++i)
     {
-        count += 1;
+        a += const_value;
     }
-    int x = count;
+    int x = a;
     std::cout << x << std::endl;
     return 0;
 }
