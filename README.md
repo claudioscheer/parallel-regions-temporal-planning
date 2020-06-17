@@ -9,3 +9,8 @@ This repository contains the following:
 # Problem addressed
 
 The core idea of this project is to represent a compiler as a PDDL domain. With this approach, a planner could test whether a program can run in parallel or not.
+
+
+# To do
+
+- [ ] Add order to operations;
