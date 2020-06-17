@@ -39,8 +39,6 @@
             ?varB - variable_name
             ?valueB - variable_value
             ?opB - assignment
-            ?varC - variable_name
-            ?valueC - variable_value
             ?opC - assignment
             ?operation_id - operation
         )

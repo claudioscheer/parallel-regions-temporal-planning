@@ -1,7 +1,7 @@
 (define (problem problem1) (:domain program3)
     (:objects
-        assignmentA assignmentA0 assignmentA1 assignmentI assignmentI0 assignmentI1 - assignment
-        multLoop0 multLoop1 - operation
+        assignmentA assignmentA0 assignmentA1 assignmentA2 assignmentI assignmentI0 assignmentI1 - assignment
+        multLoop0 multLoop1 multLoop2 - operation
         varI varA - variable_name
         valueI valueA - variable_value
     )
@@ -20,7 +20,7 @@
         (executed_binary_operation assignmentA0 assignmentI0 multLoop1 assignmentA1)
         (executed_assignment varA valueA assignmentA1)
         (executed_assignment varI valueI assignmentI1)
-        ; (executed_binary_operation assignmentA1 assignmentI1 multLoop2 assignmentA2)
-        ; (executed_assignment varA valueA assignmentA2)
+        (executed_binary_operation assignmentA1 assignmentI1 multLoop2 assignmentA2)
+        (executed_assignment varA valueA assignmentA2)
     ))
 )
