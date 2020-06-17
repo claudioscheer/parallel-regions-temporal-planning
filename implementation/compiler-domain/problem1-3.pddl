@@ -1,4 +1,4 @@
-(define (problem problem1) (:domain program3)
+(define (problem problem1_3) (:domain compiler)
     (:objects
         assignmentA assignmentA0 assignmentA1 assignmentA2 assignmentI assignmentI0 assignmentI1 - assignment
         multLoop0 multLoop1 multLoop2 - operation

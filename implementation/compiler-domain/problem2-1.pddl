@@ -1,4 +1,4 @@
-(define (problem problem2) (:domain program1)
+(define (problem problem2_1) (:domain compiler)
     (:objects
         assignmentA assignmentC - assignment
         sumAA - operation
@@ -11,8 +11,8 @@
     )
 
     (:goal (and
-        (executed_assignment assignmentA)
+        (executed_assignment varA valueA assignmentA)
         (executed_binary_operation assignmentA assignmentA sumAA assignmentC)
-        (executed_assignment assignmentC)
+        (executed_assignment varC valueC assignmentC)
     ))
 )

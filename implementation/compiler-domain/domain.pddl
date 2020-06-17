@@ -1,6 +1,6 @@
-(define (domain program1)
+(define (domain compiler)
 
-    (:requirements :strips :typing :negative-preconditions :equality)
+    (:requirements :strips :typing :negative-preconditions)
 
     (:types
         operation - object
@@ -11,7 +11,8 @@
 
     (:predicates
         (variable_info ?variable - variable_name ?value - variable_value ?assignment_operation - assignment)
-        (executed_assignment ?id - assignment)
+        (executed_assignment ?var - variable_name ?value - variable_value ?id - assignment)
+        (executed_operation ?id - operation)
         (executed_binary_operation ?a - assignment ?b - assignment ?id - operation ?c - assignment)
     )
 
@@ -22,11 +23,11 @@
             ?operation_id - assignment
         )
         :precondition (and
-            (not (executed_assignment ?operation_id))
-            (variable_info ?var ?value ?operation_id)
+            (not (executed_assignment ?var ?value ?operation_id))
         )
         :effect (and
-            (executed_assignment ?operation_id)
+            (variable_info ?var ?value ?operation_id)
+            (executed_assignment ?var ?value ?operation_id)
         )
     )
 
@@ -38,20 +39,19 @@
             ?varB - variable_name
             ?valueB - variable_value
             ?opB - assignment
-            ?varC - variable_name
-            ?valueC - variable_value
             ?opC - assignment
             ?operation_id - operation
         )
         :precondition (and
+            (not (executed_operation ?operation_id))
             (variable_info ?varA ?valueA ?opA)
             (variable_info ?varB ?valueB ?opB)
             (not (executed_binary_operation ?opA ?opB ?operation_id ?opC))
-            (executed_assignment ?opA)
-            (executed_assignment ?opB)
+            (executed_assignment ?varA ?valueA ?opA)
+            (executed_assignment ?varB ?valueB ?opB)
         )
-        :effect (and 
-            (variable_info ?varC ?valueC ?opC)
+        :effect (and
+            (executed_operation ?operation_id)
             (executed_binary_operation ?opA ?opB ?operation_id ?opC)
         )
     )
