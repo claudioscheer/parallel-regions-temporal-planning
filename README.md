@@ -2,8 +2,9 @@
 
 This repository contains the following:
 - [implementation](./implementation): PDDL formalization of the domain and problems;
-- [proposal](./scheer-proposal): LaTeX sources of the domain proposal;
 - [paper](./scheer-paper): LaTeX sources of the final paper;
+- [planner](./planner): Temporal Planning;
+- [proposal](./scheer-proposal): LaTeX sources of the domain proposal;
 
 
 # Problem addressed
