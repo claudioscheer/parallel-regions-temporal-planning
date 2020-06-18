@@ -15,3 +15,4 @@ The core idea of this project is to represent a compiler as a PDDL domain. With 
 
 - [x] Add order to operations;
 - [x] Add used planner binaries ([link](https://github.com/claudioscheer/source-code-compiler-pddl/tree/master/planner));
+- [ ] Send a pull request to the original planner with the changes;

@@ -5,7 +5,8 @@ I used the Temporal Planning available [here](https://github.com/aig-upf/tempora
 
 # Changes
 
-To compile Fast Downward, I had to remove `-Werror` at line 17 of the [FastDownwardMacros.cmake](https://github.com/aig-upf/temporal-planning/blob/master/fd_copy/src/cmake_modules/FastDownwardMacros.cmake) file.
+- To compile Fast Downward, I had to remove `-Werror` at line 17 of the [FastDownwardMacros.cmake](https://github.com/aig-upf/temporal-planning/blob/master/fd_copy/src/cmake_modules/FastDownwardMacros.cmake) file.
+- Move print from Python 2 to Python 3 (to do).
 
 
 # Release
