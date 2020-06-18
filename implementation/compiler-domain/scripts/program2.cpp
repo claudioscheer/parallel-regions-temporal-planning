@@ -3,13 +3,13 @@
 
 int main()
 {
-    int sum = 0;
+    int s = 0;
     std::vector<int> x = {1, 2, 3};
     for (int i = 0; i < x.size(); i++)
     {
-        sum += x[i];
+        s += x[i];
     }
-    std::cout << sum << std::endl;
+    std::cout << s << std::endl;
 
     return 0;
 }
