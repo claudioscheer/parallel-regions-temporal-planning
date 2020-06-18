@@ -295,3 +295,5 @@ TSWLatexianTemp*
 .history
 
 # End of https://www.gitignore.io/api/linux,latex,visualstudiocode
+
+planner/temporal-planning
