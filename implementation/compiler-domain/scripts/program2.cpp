@@ -1,13 +1,15 @@
 #include <iostream>
+#include <vector>
 
 int main()
 {
-    int const_value = 1;
-    int a = 0;
-    for (int i = 0; i < 3; ++i)
+    int sum = 0;
+    std::vector<int> x = {1, 2, 3};
+    for (int i = 0; i < x.size(); i++)
     {
-        a += const_value;
+        sum += x[i];
     }
-    std::cout << a << std::endl;
+    std::cout << sum << std::endl;
+
     return 0;
 }
