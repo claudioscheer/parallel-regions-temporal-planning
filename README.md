@@ -13,4 +13,5 @@ The core idea of this project is to represent a compiler as a PDDL domain. With 
 
 # To do
 
-- [ ] Add order to operations;
+- [x] Add order to operations;
+- [ ] Add used planner binaries;
