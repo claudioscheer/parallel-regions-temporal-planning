@@ -11,9 +11,10 @@
         (executed_instruction id0)
         (variable_info varA valueA assignmentA)
 
-        (operation_id sumAA id2)
         (assignment_id assignmentA id1)
+        (operation_id sumAA id2)
         (assignment_id assignmentC id3)
+        
         (dependency_tree id0 id1)
         (dependency_tree id1 id2)
         (dependency_tree id2 id3)
