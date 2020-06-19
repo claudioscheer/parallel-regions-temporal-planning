@@ -10,6 +10,5 @@ int main()
         s += x[i];
     }
     std::cout << s << std::endl;
-
     return 0;
 }
