@@ -1,7 +1,8 @@
 (define (problem problem1_4) (:domain compiler)
     (:objects
-        id0 id1 id2 id3 id4 id5 id6 - id
+        id0 id1 id2 id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 id13 id14 - id
         assignmentA assignmentB assignmentC assignmentI assignmentJ assignmentK - assignment
+        multipSum0 multipSum1 multipSum2 multipSum3 multipSum4 multipSum5 multipSum6 multipSum7 - operation
     )
 
     (:init
@@ -13,15 +14,77 @@
         (assignment_id assignmentI id4)
         (assignment_id assignmentJ id5)
         (assignment_id assignmentK id6)
+        (operation_id multipSum0 id7)
+        (operation_id multipSum1 id8)
+        (operation_id multipSum2 id9)
+        (operation_id multipSum3 id10)
+        (operation_id multipSum4 id11)
+        (operation_id multipSum5 id12)
+        (operation_id multipSum6 id13)
+        (operation_id multipSum7 id14)
 
         (dependency_tree id0 id1)
         (dependency_tree id0 id2)
         (dependency_tree id0 id3)
-        (dependency_tree id1 id4)
-        (dependency_tree id2 id4)
         (dependency_tree id3 id4)
         (dependency_tree id4 id5)
         (dependency_tree id5 id6)
+        
+        (dependency_tree id1 id7)
+        (dependency_tree id2 id7)
+        (dependency_tree id3 id7)
+        (dependency_tree id4 id7)
+        (dependency_tree id5 id7)
+        (dependency_tree id6 id7)
+
+        (dependency_tree id1 id8)
+        (dependency_tree id2 id8)
+        (dependency_tree id3 id8)
+        (dependency_tree id4 id8)
+        (dependency_tree id5 id8)
+        (dependency_tree id6 id8)
+
+        (dependency_tree id1 id9)
+        (dependency_tree id2 id9)
+        (dependency_tree id3 id9)
+        (dependency_tree id4 id9)
+        (dependency_tree id5 id9)
+        (dependency_tree id6 id9)
+
+        (dependency_tree id1 id10)
+        (dependency_tree id2 id10)
+        (dependency_tree id3 id10)
+        (dependency_tree id4 id10)
+        (dependency_tree id5 id10)
+        (dependency_tree id6 id10)
+
+        (dependency_tree id1 id11)
+        (dependency_tree id2 id11)
+        (dependency_tree id3 id11)
+        (dependency_tree id4 id11)
+        (dependency_tree id5 id11)
+        (dependency_tree id6 id11)
+
+        (dependency_tree id1 id12)
+        (dependency_tree id2 id12)
+        (dependency_tree id3 id12)
+        (dependency_tree id4 id12)
+        (dependency_tree id5 id12)
+        (dependency_tree id6 id12)
+
+        (dependency_tree id1 id13)
+        (dependency_tree id2 id13)
+        (dependency_tree id3 id13)
+        (dependency_tree id4 id13)
+        (dependency_tree id5 id13)
+        (dependency_tree id6 id13)
+
+        (dependency_tree id1 id14)
+        (dependency_tree id2 id14)
+        (dependency_tree id3 id14)
+        (dependency_tree id4 id14)
+        (dependency_tree id5 id14)
+        (dependency_tree id6 id14)
     )
 
     (:goal (and
@@ -31,5 +94,13 @@
         (executed_assignment assignmentI)
         (executed_assignment assignmentJ)
         (executed_assignment assignmentK)
+        (executed_binary_operation assignmentA assignmentB multipSum0 assignmentC)
+        (executed_binary_operation assignmentA assignmentB multipSum1 assignmentC)
+        (executed_binary_operation assignmentA assignmentB multipSum2 assignmentC)
+        (executed_binary_operation assignmentA assignmentB multipSum3 assignmentC)
+        (executed_binary_operation assignmentA assignmentB multipSum4 assignmentC)
+        (executed_binary_operation assignmentA assignmentB multipSum5 assignmentC)
+        (executed_binary_operation assignmentA assignmentB multipSum6 assignmentC)
+        (executed_binary_operation assignmentA assignmentB multipSum7 assignmentC)
     ))
 )
