@@ -3,13 +3,10 @@
         id0 id1 id2 id3 - id
         assignmentA assignmentC - assignment
         sumAA - operation
-        varA varC - variable_name
-        valueA valueC - variable_value
     )
 
     (:init
         (executed_instruction id0)
-        (variable_info varA valueA assignmentA)
 
         (assignment_id assignmentA id1)
         (operation_id sumAA id2)
@@ -21,8 +18,8 @@
     )
 
     (:goal (and
-        (executed_assignment varA valueA assignmentA)
+        (executed_assignment assignmentA)
         (executed_binary_operation assignmentA assignmentA sumAA assignmentC)
-        (executed_assignment varC valueC assignmentC)
+        (executed_assignment assignmentC)
     ))
 )

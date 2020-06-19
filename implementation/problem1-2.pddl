@@ -3,14 +3,10 @@
         id0 id1 id2 id3 id4 id5 id6 id7 id8 - id
         assignmentS assignmentS0 assignmentS1 assignmentS2 assignmentArray - assignment
         sum0 sum1 sum2 - operation
-        varS varArray - variable_name
-        valueS valueArray - variable_value
     )
 
     (:init
         (executed_instruction id0)
-        (variable_info varS valueS assignmentS)
-        (variable_info varArray valueArray assignmentArray)
 
         (assignment_id assignmentS id1)
         (assignment_id assignmentArray id2)
@@ -35,13 +31,13 @@
     )
 
     (:goal (and
-        (executed_assignment varS valueS assignmentS)
-        (executed_assignment varArray valueArray assignmentArray)
+        (executed_assignment assignmentS)
+        (executed_assignment assignmentArray)
         (executed_binary_operation assignmentS assignmentArray sum0 assignmentS0)
-        (executed_assignment varS valueS assignmentS0)
+        (executed_assignment assignmentS0)
         (executed_binary_operation assignmentS assignmentArray sum1 assignmentS1)
-        (executed_assignment varS valueS assignmentS1)
+        (executed_assignment assignmentS1)
         (executed_binary_operation assignmentS assignmentArray sum2 assignmentS2)
-        (executed_assignment varS valueS assignmentS2)
+        (executed_assignment assignmentS2)
     ))
 )
