@@ -21,8 +21,8 @@
 
     (:durative-action assignment
         :parameters (
-            ?id - assignment
             ?instruction_id - id
+            ?id - assignment
         )
         :duration (= ?duration 1)
         :condition (and
@@ -43,11 +43,11 @@
 
     (:durative-action binary_operation
         :parameters (
+            ?instruction_id - id
             ?idA - assignment
             ?idB - assignment
-            ?idC - assignment
             ?operation_id - operation
-            ?instruction_id - id
+            ?idC - assignment
         )
         :duration (= ?duration 1)
         :condition (and
