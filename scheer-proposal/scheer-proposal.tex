@@ -26,11 +26,13 @@
 }
 \maketitle
 
+
 \begin{abstract}
   \begin{quote}
     Testing whether a region in a program can be run in parallel is not an easy task. This process takes a lot of time and, consequently, finantial resources. As an approach to this problem, this paper proposes formalizing a compiler with PDDL. With this formalization, it will be possible to reduce the identification of a parallel code to a conventional \textbf{search problem}.
   \end{quote}
 \end{abstract}
+
 
 \noindent There are still many programs that do not exploit the parallel capacity of today's processors. One of the main reasons for this is because the cost to rewrite a program is high. Among the steps involved in the process of migrating a program to a parallel approach, the most expensive is to identify the regions of the program than can be executed in parallel. In addition to identifying the regions, it is necessary to validate whether the parallel execution of that region brings positive results.
 
@@ -42,7 +44,6 @@ A PDDL domain describe actions that can be performed in an initial state, to ach
 
 The planner will be reponsible for finding the set of predicates that can be run in parallel. In the Section~Results~Evaluation, I discuss more about how I will evaluate whether the results were positive or not. In addition, in Section~Project~Management, I show the schedule that will be followed to execute this proposal.
 
-% I did not find anything related.
 
 \section{Technical Approach}
 
@@ -62,11 +63,13 @@ There are still some questions to be answered during the execution of the projec
   \item Can I set a weight for the planner to get regions that are really worth running in parallel?
 \end{enumerate}
 
+
 \section{Results Evaluation}
 
 As previously described, the goal of the planner will be to execute all instructions in the correct order and find instructions that can be executed in parallel. Hence, to evaluate the correct output of the planner, I will map the predicates back to the source code and validate the parallel execution proposed by the planner.
 
 The main objective of decoding the planner output in a source code is to test whether the parallel execution really brings positive results. A positive result, in the proposed approach, can be understood as the execution of a problem in less time.
+
 
 \section{Project Management}
 
@@ -91,11 +94,13 @@ The main objective of decoding the planner output in a source code is to test wh
   \end{tabularx}
 \end{center}
 
+
 \section{Conclusion}
 
 In summary, this approach will reduce the problem of finding a parallel region to a \textbf{search problem}. As an output, the planner will execute all instructions of the program and identify the regions that can be executed in parallel. Clearly, these approach needs a validation in terms of testing to find out if the regions are really parallel.
 
 The approach proposed in this paper is not conventional for finding parallel regions. However, if the results are positives, this approach can be used to reduce the time and cost to find these regions.
+
 
 \bibliographystyle{aaai}
 \bibliography{references}
