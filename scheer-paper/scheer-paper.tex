@@ -4,6 +4,16 @@
 \usepackage{times}
 \usepackage{helvet}
 \usepackage{courier}
+\usepackage[pdftex,dvipsnames]{xcolor}
+\usepackage{xargs}
+\usepackage{hyperref}
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,textcolor=black,bordercolor=red,#1]{#2}}
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
 
 \frenchspacing
 \setlength{\pdfpagewidth}{8.5in}
@@ -50,10 +60,25 @@ There are different approaches that can be used to formalize temporal actions wi
 
 The sections \texttt{:condition} and \texttt{:effect} are separated in three categories: \texttt{at start}, \texttt{over all} and \texttt{at end}. As described by \cite{DBLP:series/synthesis/2019Haslum}, these categories represent the conditions and effects used at each stage of the action. The \texttt{at start} statements are used when starting the action. The \texttt{over all} statements are used during the time the action is being executed. The \texttt{at end} statements are used at the end of the action.
 
+\improvement[inline]{The following section may not be necessary.}
+I must mention that \texttt{:durative-actions} can be translated into instantaneous actions. Here is the paper: \cite{DBLP:conf/ecai/ScalaHTR16}.
 
-\subsection{Fast Downward}
 
-I used the Fast Downward planner to find best temporal plan. Originaly, the paper form \cite{Helmert_2006} does not state that Fast Downward planner support temporal planning.
+\subsection{STP}
+
+I used the STP (Simultaneous Temporal Planner) planner to find the best temporal plan. STP uses a modified version of the Fast Downward \cite{Helmert_2006} planner that can generate a temporal plan. The version used in this paper is provided by the Artificial Intelligence and Machine Learning Group - Universitat Pompeu Fabra\footnote{\href{https://github.com/aig-upf}{https://github.com/aig-upf}}.
+
+The STP planner needs to receive as a parameter the maximum number of actions that can be executed at the same time. When finding parallel regions, this parameter is a problem, because we do not know how many instructions can be executed in parallel. Therefore, in some cases, it is necessary to test different values for this paramenter.
+
+
+\section{Formalization}
+
+\info[inline]{Describe here how I did the formalization.}
+
+
+\section{Results}
+
+\info[inline]{Describe here the results.}
 
 
 \bibliographystyle{aaai}
