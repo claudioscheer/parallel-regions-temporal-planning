@@ -86,11 +86,21 @@
 
 \begin{abstract}
     \begin{quote}
-        Abstract.
+        Testing whether a region in a program can be run in parallel is not an easy task. As an approach to this problem, this paper proposes a formalization of a source code compiler with PDDL. With this approach, it is possible to reduce the identification of parallel regions in a source code to a conventional search problem. I used the STP planner to find a temporal plan in which some actions can be execute in parallel. The results show that temporal planning can be an alterantive to find parallel regions, but more studies are still needed, mainly on how to translate a source code to a PDDL problem.
     \end{quote}
 \end{abstract}
 
-\noindent Introduction.
+\noindent There are still many programs that do not exploit the parallel capacity of today's multiprocessors. One of the main reasons for this is because the cost to rewrite a program is high. Among the steps involved in the process of migrating a program to a parallel approach, the most expensive is to identify the regions of the program than can be executed in parallel. In addition to identifying the regions, it is necessary to validate whether the parallel execution of that region brings positive results.
+
+According to \cite{doi:10.1177/1094342017695639}, loops detection, variable dependencies, identifying whether the arguments are read or written, among other analyzes, are the main patterns that identify a region parallel in a program. Over time, these caracteristics may change and the static analysis will also need to be changed.
+
+Therefore, instead of using a static analysis of the source code, the approach in this paper reduce the problem of identifying a parallel region to a search problem. The compiler domain was formalized using PDDL. In a nutshell, the domain works as a source code compiler and the problem formalization as the source code. The Section~Formalization discusses in more detail how the PDDL domain works.
+
+The idea of a PDDL domain is to describe actions that can be performed in an initial state, to achieve a set of goals. In this paper, the initial state is the dependency tree of the variables and operations of the source code and the set of goals is the complete execution of all instructions in the source code, taking into account the dependency tree.
+
+A problem formalized in PDDL cannot understand source code written in C++ as input, for example. The initial state must be a set of predicates. Hence, the source code provided as an initial state for the planner must be mapped to a set of predicates. This process is the bottleneck of the proposed approach. Some ideas for this problem are discussed in the Section~Source~Code~Translation.
+
+The Section~Bibliography discusses what temporal planning is and some details of the STP planner used. In the Section~Results, I show the results obtained in a real world example. Finally, the Section~Conclusion leaves some questions that still need to be answered in this new approach to find parallel regions.
 
 
 \section{Bibliography}
@@ -110,21 +120,56 @@ There are different approaches that can be used to formalize temporal actions wi
 
 The sections \texttt{:condition} and \texttt{:effect} are separated in three categories: \texttt{at start}, \texttt{over all} and \texttt{at end}. As described by \cite{DBLP:series/synthesis/2019Haslum}, these categories represent the conditions and effects used at each stage of the action. The \texttt{at start} statements are used when starting the action. The \texttt{over all} statements are used during the time the action is being executed. The \texttt{at end} statements are used at the end of the action.
 
-\improvement[inline]{The following section may not be necessary.}
-I must mention that \texttt{:durative-action} can be translated into instantaneous actions. Here is the paper: \cite{DBLP:conf/ecai/ScalaHTR16}.
+% \improvement[inline]{The following section may not be necessary.}
+% I must mention that \texttt{:durative-action} can be translated into instantaneous actions. Here is the paper: \cite{DBLP:conf/ecai/ScalaHTR16}.
 
 
 \subsection{STP}
 
 I used the STP (Simultaneous Temporal Planner) planner, introduced by \cite{Blanco2018ForwardsearchTP}, to find the best temporal plan. STP uses a modified version of the Fast Downward \cite{Helmert_2006} planner that can generate a temporal plan. The version used in this paper is provided by the Artificial Intelligence and Machine Learning Group - Universitat Pompeu Fabra\footnote{\href{https://github.com/aig-upf}{https://github.com/aig-upf}}.
 
-The STP planner needs to receive as a parameter the maximum number of actions that can be executed at the same time. When finding parallel regions, this parameter is a problem, because we do not know how many instructions can be executed in parallel. Therefore, in some cases, it is necessary to test different values for this paramenter.
-\info[inline]{The higher this number, the more time it takes to solve the problem.}
+The STP planner needs to receive as a parameter the maximum number of actions that can be executed at the same time. When finding parallel regions, this parameter is a problem, because we do not know how many instructions can be executed in parallel. Therefore, in some cases, it is necessary to test different values for this paramenter. It is important to note that the higher this number, the more time STP takes to find a temporal plan.
 
 
 \section{Source Code Translation}
 
-\info[inline]{Describe here some patterns on how to convert source code into the PDDL problem.}
+The correct translation of the source code is the main point to find parallel regions using temporal planning. However, this paper would not cover all possibilities in a source code. The focus is on source codes with assignments and operations between two variables and simple loops.
+
+It is easy to formalize in a PDDL problem source code without loops. The dependency tree is easy to create. More about these type of problems is discussed in Section~Results.
+
+However, when the source code have a loop, the level of abstractions becomes a problem. For example: is it necessary to formalize the assignments that control the index of a for loop? Two examples of a for loop in C++ are shown below.
+
+The Listing~\ref{lst:sum-vector-cpp} shows how to make a sum of all items in a vector. In this case, the variable \texttt{i} accesses different loctions of the vector. In theory, the sum of \texttt{s} plus \texttt{x[i]} can be executed in parallel. Since the order of a sum does not matter and \texttt{s} is shared between threads\footnote{The concurrency between variables is not taked into account here.}, in the end, \texttt{s} will be equal to 6.
+
+\begin{lstlisting}[caption=Sum of vector - C++,label=lst:sum-vector-cpp,style=cppStyle]
+int main()
+{
+    int s = 0;
+    std::vector<int> x = {1, 2, 3};
+    for (int i = 0; i < x.size(); i++)
+    {
+        s += x[i];
+    }
+    return 0;
+}
+\end{lstlisting}
+
+In the formalization of the Listing~\ref{lst:sum-vector-cpp}, the assignment of the variable \texttt{i} can be ignore. However, in Listing~\ref{lst:initializing-array-cpp}, where the initialization of a position in the array depends on value of the previous position, the variable \texttt{i} cannot be ignored. If the loop is executed in parallel, the previous position may not have been initialized yet, throwing an exception.
+
+\begin{lstlisting}[caption=Initializing array - C++,label=lst:initializing-array-cpp,style=cppStyle]
+int main()
+{
+    int a[3] = {0};
+    a[0] = rand();
+    for (int i = 1; i < 3; ++i)
+    {
+        a[i] = a[i - 1] + rand();
+    }
+    return 0;
+}
+\end{lstlisting}
+
+There are many variants that can happen in a source code. The level of abstraction depends on how the program was built.
 
 
 \section{Formalization}
@@ -132,8 +177,6 @@ The STP planner needs to receive as a parameter the maximum number of actions th
 I used only two \texttt{:durative-action} to formalize the problem. One to handle assignment instructions and another to handle binary operations. Binary operations must be understood as any operations (sum, multiplication, XOR, etc) that involve two variables.
 
 All \texttt{:durative-action} must have a duration time. However, since my objective is not to cover the execution time of the instructions in this paper, I set the duration time to 1 for all actions. This approach ensures that when operations cannot be executed in parallel, the total execution time will be increased by one. In a future work, it may be a good approach to define different duration time for each instruction.
-
-\change[inline]{In a future work, it may be a good approach to define different duration time for each instruction.}
 
 By definition, each operation and assignment instruction must have an identifier. With this identification, we can create the dependency tree for the instructions. The dependency tree makes it easy to test whether all dependencies for a specific instruction have already been executed. Since each problem has a specific dependency tree, the dependency tree must be defined in the initial state of the problem. In the initial state, in addition to the dependency tree, the identifier for the operation and assignment instructions must also be defined.
 
@@ -235,8 +278,6 @@ In this section, I will show a simple example of formalization. Regarding our ob
 The example is represented by the source code shown in Listing~\ref{lst:source-code}. This simple source code sums two variables and set the result in the variable \texttt{c}. The variables \texttt{a} and \texttt{b} are not dependent on each other. Therefore, we must be able to execute the two assignment instructions in parallel, as shown in Figure~\ref{fig:dependency-tree-parallel}.
 
 \begin{lstlisting}[caption=Source code,label=lst:source-code,style=cppStyle]
-#include <iostream>
-
 int main()
 {
     int a = 3;
@@ -299,7 +340,25 @@ Imagining a source code similar to Listing~\ref{lst:source-code}, where the vari
     \label{fig:not-parallel-plan}
 \end{figure}
 
+
 \section{Conclusion}
+
+The idea of reducing the search for parallel regions in a source code to a search problem is unconventional. Therefore, we still have many questions:
+
+\begin{itemize}
+    \item What is the best way to abstract a source code?
+    \item How can we abstract nested loops?
+    \item In a for loop, for example, when should we formalize the index (usually the variable \texttt{i}) assignment?
+    \item Are the durative actions defined in this paper sufficient?
+    \item Can we map the temporal plan back to the source code?
+    \item How can we correctly choose the maximum number of parallel instructions in STP?
+    \item Is STP the best temporal planner for this problem?
+    \item Shouldn't we use different duration times for each assignment and binary operation?
+    \item Do all regions need to run in parallel?
+    \item How should \texttt{if} instructions be handled?
+\end{itemize}
+
+Despite all these question, we have a guarantee: this approach can identify parallel regions. Beyond that, it is important to stand out that the possibility to abstract the problem can make the formalization easier and the search time lower.
 
 
 \bibliographystyle{aaai}

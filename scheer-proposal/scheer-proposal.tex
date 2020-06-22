@@ -34,15 +34,7 @@
 \end{abstract}
 
 
-\noindent There are still many programs that do not exploit the parallel capacity of today's processors. One of the main reasons for this is because the cost to rewrite a program is high. Among the steps involved in the process of migrating a program to a parallel approach, the most expensive is to identify the regions of the program than can be executed in parallel. In addition to identifying the regions, it is necessary to validate whether the parallel execution of that region brings positive results.
-
-According to \cite{doi:10.1177/1094342017695639}, loops detection, variable dependencies, identifying whether the arguments are read or written, among other analyzes, are the main patterns that identify a region parallel in a program. Over time, these caracteristics may change and the static analysis will need to be changed.
-
-Therefore, instead of using a static analysis of the source code, the approach in this paper will reduce the problem of identifying a region that can be executed in parallel to a \textbf{search problem}. The compiler domain will be formalized using PDDL. In a nutshell, the domain will function as a source code compiler. Section~Technical~Approach discusses in more detail how the PDDL domain will work.
-
-A PDDL domain describe actions that can be performed in an initial state, to achieve a set of goals. In this paper, the source code will be treated as the initial state. The set of goals will be the complete execution of all instructions in the source code, in the correct order. A problem formalized in PDDL cannot understand source code written in C++ as input, for example. The initial state must be a set of predicates. Hence, the source code provided as an initial state for the planner must be mapped to a set of predicates. This process is the bottleneck of the proposed approach. However, this task can be easily automated (I was thinking of creating this tool, but first I will implement the PDDL domain).
-
-The planner will be reponsible for finding the set of predicates that can be run in parallel. In the Section~Results~Evaluation, I discuss more about how I will evaluate whether the results were positive or not. In addition, in Section~Project~Management, I show the schedule that will be followed to execute this proposal.
+\noindent 
 
 
 \section{Technical Approach}
