@@ -62,6 +62,7 @@
 {
   \begin{frame}
     \frametitle{Table of Contents}
+
     \tableofcontents[currentsection]
   \end{frame}
 }
@@ -71,29 +72,30 @@
 
 \begin{frame}
   \frametitle{Table of Contents}
+
   \tableofcontents
 \end{frame}
 %---------------------------------------------------------
 
 
 %---------------------------------------------------------
-\section{Problem}
+\section{Proposal}
 
 \begin{frame}
-  \frametitle{Finding parallel regions}
+  \frametitle{Parallel Regions}
 
   \begin{itemize}
-    \item It takes a lot of time;
+    \item Find parallel regions in a source code;
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Common approaches}
+  \frametitle{Common Approach}
 
   Static analysis of the source code:
   \begin{itemize}
-    \item loops detection;
-    \item variable dependencies;
+    \item loops;
+    \item instruction dependencies;
     \item identifying whether the arguments are read or written;
   \end{itemize}
 \end{frame}
@@ -114,7 +116,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{PDDL domain - assignment}
+  \frametitle{PDDL Domain - assignment}
 
   \begin{lstlisting}[style=pddlStyle,basicstyle=\ttfamily\fontsize{10pt}{10pt}\selectfont]
     (:durative-action assignment
@@ -139,7 +141,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{PDDL domain - binary\_operation}
+  \frametitle{PDDL Domain - binary\_operation}
 
   \begin{lstlisting}[style=pddlStyle,basicstyle=\ttfamily\fontsize{8pt}{8pt}\selectfont]
     (:durative-action binary_operation
@@ -171,7 +173,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{PDDL problem 1}
+  \frametitle{PDDL Problem - 1}
 
   \begin{columns}
     \begin{column}{0.35\textwidth}
@@ -194,41 +196,41 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{PDDL problem 1}
+  \frametitle{PDDL Problem - 1}
 
   \begin{lstlisting}[style=pddlStyle,basicstyle=\ttfamily\fontsize{10pt}{10pt}\selectfont]
     (:init
-        (executed_instruction id0)
+      (executed_instruction id0)
 
-        (assignment_id assignmentA id1)
-        (assignment_id assignmentB id2)
-        (operation_id sumAB id3)
-        (assignment_id assignmentC id4)
-        
-        (dependency_tree id0 id1)
-        (dependency_tree id0 id2)
-        (dependency_tree id1 id3)
-        (dependency_tree id2 id3)
-        (dependency_tree id3 id4)
+      (assignment_id assignmentA id1)
+      (assignment_id assignmentB id2)
+      (operation_id sumAB id3)
+      (assignment_id assignmentC id4)
+      
+      (dependency_tree id0 id1)
+      (dependency_tree id0 id2)
+      (dependency_tree id1 id3)
+      (dependency_tree id2 id3)
+      (dependency_tree id3 id4)
     )
 
     (:goal (and
-        (executed_assignment assignmentA)
-        (executed_assignment assignmentB)
-        (executed_binary_operation assignmentA assignmentB sumAB assignmentC)
-        (executed_assignment assignmentC)
+      (executed_assignment assignmentA)
+      (executed_assignment assignmentB)
+      (executed_binary_operation assignmentA assignmentB sumAB assignmentC)
+      (executed_assignment assignmentC)
     ))
   \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{PDDL problem 1}
+  \frametitle{PDDL Problem - 1}
 
   \includegraphics[width=1\textwidth]{../images/parallel-tasks-Parallel.png}
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{PDDL problem 2}
+  \frametitle{PDDL Problem - 2}
 
   \begin{columns}
     \begin{column}{0.35\textwidth}
@@ -251,35 +253,35 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{PDDL problem 2}
+  \frametitle{PDDL Problem - 2}
 
   \begin{lstlisting}[style=pddlStyle,basicstyle=\ttfamily\fontsize{10pt}{10pt}\selectfont]
     (:init
-        (executed_instruction id0)
+      (executed_instruction id0)
 
-        (assignment_id assignmentA id1)
-        (assignment_id assignmentB id2)
-        (operation_id sumAB id3)
-        (assignment_id assignmentC id4)
-        
-        (dependency_tree id0 id1)
-        (dependency_tree id1 id2)
-        (dependency_tree id1 id3)
-        (dependency_tree id2 id3)
-        (dependency_tree id3 id4)
+      (assignment_id assignmentA id1)
+      (assignment_id assignmentB id2)
+      (operation_id sumAB id3)
+      (assignment_id assignmentC id4)
+      
+      (dependency_tree id0 id1)
+      (dependency_tree id1 id2)
+      (dependency_tree id1 id3)
+      (dependency_tree id2 id3)
+      (dependency_tree id3 id4)
     )
 
     (:goal (and
-        (executed_assignment assignmentA)
-        (executed_assignment assignmentB)
-        (executed_binary_operation assignmentA assignmentB sumAB assignmentC)
-        (executed_assignment assignmentC)
+      (executed_assignment assignmentA)
+      (executed_assignment assignmentB)
+      (executed_binary_operation assignmentA assignmentB sumAB assignmentC)
+      (executed_assignment assignmentC)
     ))
   \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{PDDL problem 2}
+  \frametitle{PDDL Problem - 2}
 
   \includegraphics[width=1\textwidth]{../images/parallel-tasks-NotParallel.png}
 \end{frame}
@@ -327,35 +329,98 @@
     \end{column}
   \end{columns}
 \end{frame}
-%---------------------------------------------------------
 
+\begin{frame}[fragile]
+  \frametitle{PDDL Problem}
 
-%---------------------------------------------------------
-\section{Questions/Ideas}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{lstlisting}[style=pddlStyle,basicstyle=\ttfamily\fontsize{7pt}{7pt}\selectfont]
+        (:init
+          (executed_instruction id0)
+    
+          (assignment_id assignmentS id1)
+          (assignment_id assignmentArray id2)
+          (operation_id sum0 id3)
+          (assignment_id assignmentS0 id4)
+          (operation_id sum1 id5)
+          (assignment_id assignmentS1 id6)
+          (operation_id sum2 id7)
+          (assignment_id assignmentS2 id8)
+    
+          (dependency_tree id0 id1)
+          (dependency_tree id0 id2)
+          (dependency_tree id1 id3)
+          (dependency_tree id2 id3)
+          (dependency_tree id3 id4)
+          (dependency_tree id1 id5)
+          (dependency_tree id2 id5)
+          (dependency_tree id5 id6)
+          (dependency_tree id1 id7)
+          (dependency_tree id2 id7)
+          (dependency_tree id7 id8)
+        )
+      \end{lstlisting}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{lstlisting}[style=pddlStyle,basicstyle=\ttfamily\fontsize{6pt}{6pt}\selectfont]
+        (:goal (and
+          (executed_assignment assignmentS)
+          (executed_assignment assignmentArray)
+          (executed_binary_operation assignmentS assignmentArray sum0 assignmentS0)
+          (executed_assignment assignmentS0)
+          (executed_binary_operation assignmentS assignmentArray sum1 assignmentS1)
+          (executed_assignment assignmentS1)
+          (executed_binary_operation assignmentS assignmentArray sum2 assignmentS2)
+          (executed_assignment assignmentS2)
+        ))
+      \end{lstlisting}
+    \end{column}
+  \end{columns}
+\end{frame}
 
 \begin{frame}
-  \frametitle{Questions/Ideas}
+  \frametitle{stp-2}
 
-  \begin{enumerate}
-    \item<1-> Is the compiler domain capable of handling fluent variables and predicates?
-    \item<2-> Is the compiler domain capable of performing operations with strings?
-    \item<3-> Which planners should I test the compiler domain on?
-    \item<4-> How does a planner find a parallel region?
-    \item<5-> Can I set a weight for the planner to get regions that are really worth running in parallel?
-  \end{enumerate}
+  {\scriptsize
+    0.000: ( assignment id2 assignmentarray )\\
+    0.000: ( assignment id1 assignments )\\
+    1.002: ( binary\_operation id3 assignments assignmentarray sum0 assignments0 )\\
+    1.002: ( binary\_operation id5 assignments assignmentarray sum1 assignments1 )\\
+    2.002: ( binary\_operation id7 assignments assignmentarray sum2 assignments2 )\\
+    3.002: ( assignment id4 assignments0 )\\
+    3.002: ( assignment id6 assignments1 )\\
+    4.002: ( assignment id8 assignments2 )\\
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{stp-3}
+
+  {\scriptsize
+    0.000: ( assignment id2 assignmentarray )\\
+    0.000: ( assignment id1 assignments )\\
+    1.002: ( binary\_operation id3 assignments assignmentarray sum0 assignments0 )\\
+    1.002: ( binary\_operation id5 assignments assignmentarray sum1 assignments1 )\\
+    1.002: ( binary\_operation id7 assignments assignmentarray sum2 assignments2 )\\
+    2.002: ( assignment id4 assignments0 )\\
+    2.002: ( assignment id6 assignments1 )\\
+    3.002: ( assignment id8 assignments2 )\\
+  }
 \end{frame}
 %---------------------------------------------------------
 
 
 %---------------------------------------------------------
-\section{Conclusion}
+\section{Final Remarks}
 
 \begin{frame}
-  \frametitle{Conclusion}
+  \frametitle{Final Remarks}
 
   \begin{itemize}
-    \item<1-> This is not a conventional approach;
-    \item<2-> If the results are positives, the approach may reduce the amount of time to find parallel regions.
+    \item We need to inform the dependency tree;
+    \item How to parse the source code to a PDDL problem?
+    \item It is possible to identify parallel instructions;
   \end{itemize}
 \end{frame}
 %---------------------------------------------------------
