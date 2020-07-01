@@ -109,9 +109,12 @@
   \frametitle{Approach}
 
   \begin{itemize}
-    \item PDDL domain executes the instructions;
-    \item PDDL problem defines the instructions dependency tree;
-    \item Simultaneous Temporal Planner to find a temporal plan;
+    \item PDDL domain file executes the instructions;
+    \item PDDL problem file defines the instruction dependency tree;
+    \item Simultaneous Temporal Planner finds a temporal plan;
+          \begin{itemize}
+            \item State that minimizes the total cost;
+          \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -297,7 +300,7 @@
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{center}
-        \begin{lstlisting}[style=cppStyle,basicstyle=\ttfamily\fontsize{7.5pt}{7.5pt}\selectfont]
+        \begin{lstlisting}[style=cppStyle,basicstyle=\ttfamily\fontsize{7pt}{7pt}\selectfont]
           int main()
           {
             int s = 0;
@@ -313,7 +316,7 @@
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{center}
-        \begin{lstlisting}[style=cppStyle,basicstyle=\ttfamily\fontsize{6.5pt}{7.5pt}\selectfont]
+        \begin{lstlisting}[style=cppStyle,basicstyle=\ttfamily\fontsize{7pt}{7pt}\selectfont]
           int main()
           {
             int a[3] = {0};
@@ -418,9 +421,13 @@
   \frametitle{Final Remarks}
 
   \begin{itemize}
+    \item It is possible to identify parallel instructions;
+  \end{itemize}
+  \bigbreak
+  \bigbreak
+  \begin{itemize}
     \item We need to inform the dependency tree;
     \item How to parse the source code to a PDDL problem?
-    \item It is possible to identify parallel instructions;
   \end{itemize}
 \end{frame}
 %---------------------------------------------------------
