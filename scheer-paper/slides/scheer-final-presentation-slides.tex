@@ -119,6 +119,57 @@
 \end{frame}
 
 \begin{frame}[fragile]
+  \frametitle{PDDL Problem - 1}
+
+  \begin{columns}
+    \begin{column}{0.35\textwidth}
+      \begin{lstlisting}[style=cppStyle]
+        int main()
+        {
+          int a = 3;
+          int b = 3;
+          int c = a + b;
+          return 0;
+        }
+      \end{lstlisting}
+    \end{column}
+    \begin{column}{0.65\textwidth}
+      \begin{center}
+        \includegraphics[width=0.8\textwidth]{../images/dependency-tree-Parallel.png}
+      \end{center}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{PDDL Problem - 1}
+
+  \begin{lstlisting}[style=pddlStyle,basicstyle=\ttfamily\fontsize{10pt}{10pt}\selectfont]
+    (:init
+      (executed_instruction id0)
+
+      (assignment_id assignmentA id1)
+      (assignment_id assignmentB id2)
+      (operation_id sumAB id3)
+      (assignment_id assignmentC id4)
+      
+      (dependency_tree id0 id1)
+      (dependency_tree id0 id2)
+      (dependency_tree id1 id3)
+      (dependency_tree id2 id3)
+      (dependency_tree id3 id4)
+    )
+
+    (:goal (and
+      (executed_assignment assignmentA)
+      (executed_assignment assignmentB)
+      (executed_binary_operation assignmentA assignmentB sumAB assignmentC)
+      (executed_assignment assignmentC)
+    ))
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
   \frametitle{PDDL Domain - assignment}
 
   \begin{lstlisting}[style=pddlStyle,basicstyle=\ttfamily\fontsize{10pt}{10pt}\selectfont]
@@ -172,57 +223,6 @@
         (at end (executed_binary_operation ?idA ?idB ?operation_id ?idC))
       )
     )
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{PDDL Problem - 1}
-
-  \begin{columns}
-    \begin{column}{0.35\textwidth}
-      \begin{lstlisting}[style=cppStyle]
-        int main()
-        {
-          int a = 3;
-          int b = 3;
-          int c = a + b;
-          return 0;
-        }
-      \end{lstlisting}
-    \end{column}
-    \begin{column}{0.65\textwidth}
-      \begin{center}
-        \includegraphics[width=0.8\textwidth]{../images/dependency-tree-Parallel.png}
-      \end{center}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{PDDL Problem - 1}
-
-  \begin{lstlisting}[style=pddlStyle,basicstyle=\ttfamily\fontsize{10pt}{10pt}\selectfont]
-    (:init
-      (executed_instruction id0)
-
-      (assignment_id assignmentA id1)
-      (assignment_id assignmentB id2)
-      (operation_id sumAB id3)
-      (assignment_id assignmentC id4)
-      
-      (dependency_tree id0 id1)
-      (dependency_tree id0 id2)
-      (dependency_tree id1 id3)
-      (dependency_tree id2 id3)
-      (dependency_tree id3 id4)
-    )
-
-    (:goal (and
-      (executed_assignment assignmentA)
-      (executed_assignment assignmentB)
-      (executed_binary_operation assignmentA assignmentB sumAB assignmentC)
-      (executed_assignment assignmentC)
-    ))
   \end{lstlisting}
 \end{frame}
 
