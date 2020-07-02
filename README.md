@@ -1,3 +1,6 @@
+The final paper is available [here](./scheer-paper/scheer-paper.pdf).
+
+
 # About
 
 This repository contains the following:
